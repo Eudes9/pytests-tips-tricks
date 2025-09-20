@@ -14,15 +14,30 @@ jobs:
         with:
           python-version: 3.8
 
+      # Debug: show Python & pip versions
+      - name: Show environment info
+        run: |
+          which python
+          python --version
+          pip --version
+          pip list
+
       - name: Install dependencies
-        run: make install
+        run: |
+          set -x   # enable debug output
+          make install
 
       - name: Lint with pylint
-        run: make lint
+        run: |
+          set -x
+          make lint
 
       - name: Test with pytest
-        run: make test
+        run: |
+          set -x
+          make test || { echo "❌ Pytest failed"; exit 1; }
 
       - name: Format code
-        run: make format
-
+        run: |
+          set -x
+          make format
