@@ -15,13 +15,14 @@ jobs:
           python-version: 3.8
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: make install
 
       - name: Lint with pylint
-        run: pylint your_module/
+        run: make lint
 
       - name: Test with pytest
-        run: pytest
+        run: make test
 
-      - name: Format code with black
-        run: black .
+      - name: Format code
+        run: make format
+
